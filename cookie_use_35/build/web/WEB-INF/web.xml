@@ -5,16 +5,16 @@
         <servlet-class>cookie_servlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>find_cookie</servlet-name>
-        <servlet-class>find_cookie</servlet-class>
+        <servlet-name>display_cookie</servlet-name>
+        <servlet-class>display_cookie</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>cookie_servlet</servlet-name>
         <url-pattern>/cookie_servlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>find_cookie</servlet-name>
-        <url-pattern>/find_cookie</url-pattern>
+        <servlet-name>display_cookie</servlet-name>
+        <url-pattern>/display_cookie</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

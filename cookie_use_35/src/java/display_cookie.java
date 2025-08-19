@@ -16,7 +16,7 @@ import javax.servlet.http.Cookie;
  *
  * @author KSC54
  */
-public class cookie_servlet extends HttpServlet {
+public class display_cookie extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,16 +32,10 @@ public class cookie_servlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            //String a=request.getParameter("txt_ck");            
-            Cookie ck_obj=new Cookie("username","Najnin"); //create cookie 
-            ck_obj.setMaxAge(20); // set expiry time 
-            response.addCookie(ck_obj); //add cookie 
-        
-            out.println("<p><a href='display_cookie'>Click here for display all cookie</a></p>");
-            
-            /*out.println("<html><body>");
+            Cookie all_ck[]=request.getCookies(); //retrieve all cookie 
+            out.println("<html><body>");
             out.println("<h2>Cookie Demo</h2>");
-
+            
             if (all_ck != null && all_ck.length > 0) {
                 out.println("<h3>Cookies received from client:</h3>");
                 for (Cookie c : all_ck) {
@@ -52,7 +46,7 @@ public class cookie_servlet extends HttpServlet {
                 out.println("<h3>No cookies were sent by the client.</h3>");
             }
             
-            out.println("</body></html>");*/
+            out.println("</body></html>");
         }
     }
 

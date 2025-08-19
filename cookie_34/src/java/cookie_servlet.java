@@ -32,27 +32,37 @@ public class cookie_servlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            //String a=request.getParameter("txt_ck");            
-            Cookie ck_obj=new Cookie("username","Najnin"); //create cookie 
-            ck_obj.setMaxAge(20); // set expiry time 
-            response.addCookie(ck_obj); //add cookie 
-        
-            out.println("<p><a href='display_cookie'>Click here for display all cookie</a></p>");
+            String cknm=request.getParameter("txt_ck");
             
-            /*out.println("<html><body>");
-            out.println("<h2>Cookie Demo</h2>");
-
-            if (all_ck != null && all_ck.length > 0) {
-                out.println("<h3>Cookies received from client:</h3>");
-                for (Cookie c : all_ck) {
-                    out.println("Cookie name: " + c.getName() + " | Value: " + c.getValue() + "<br>");
+            Cookie all_ck[]=request.getCookies();//retrieve all cookie
+            Cookie[] cookies = request.getCookies();
+            boolean cookieFound = false;
+            //out.println(cookienm);
+            
+             // Check if the target cookie exists
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cknm.equals(cookie.getName())) {
+                        cookieFound = true;
+                        out.println(cknm);
+                        break;
+                    }
                 }
+            }
+
+            // If the cookie does not exist, create and add it to the response
+            if (!cookieFound) {
+                Cookie newCookie = new Cookie("cookienm",cknm);
+                newCookie.setMaxAge(60); // 1 day
+                response.addCookie(newCookie);
+                out.println("<p>Cookie " +request.getParameter(cknm)+ " was not found. A new one has been created.</p>");
             } 
             else {
-                out.println("<h3>No cookies were sent by the client.</h3>");
+                out.println("<p>Cookie " +request.getParameter(cknm)+ " already exists.</p>");
             }
+
+            out.println("<p><a href='display_cookie'>Click here for display all cookie</a></p>");
             
-            out.println("</body></html>");*/
         }
     }
 

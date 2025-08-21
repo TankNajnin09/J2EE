@@ -6,6 +6,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -74,16 +75,29 @@ public class register_stud extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            out.println("Student Rollno = " + request.getParameter("txt_no"));
-            out.println("\nStudent Name = " + request.getParameter("txt_nm"));
-            out.println("\nCourse = " + request.getParameter("txt_course"));
-            out.println("\nsemester = " + request.getParameter("txt_sem"));
-            String[] values=request.getParameterValues("chk_hobby");
-            out.println("\nHobbies = ");    
-            for(int i=0;i<values.length;i++)
-            {
-               out.println( values[i] );
+            out.println("<html><body>");
+            out.println("<h2>Student Registration Details</h2>");
+            out.println("<ul>");
+            
+            Enumeration<String> en=request.getParameterNames(); 
+            while(en.hasMoreElements()) 
+            { 
+                String paramnm=en.nextElement();
+                String[] values=request.getParameterValues(paramnm);
+                
+                out.println("<li><strong>" + paramnm + ":</strong> ");
+                for(int i=0;i<values.length;i++)
+                {
+                    out.println(values[i]);
+                    if (i < values.length - 1) 
+                    {
+                        out.print(", ");
+                    }
+                }
+                out.println("</li>");
             }
+            out.println("</ul>");
+            out.println("</body></html>");
         }
         
     }
